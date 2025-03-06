@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('offices', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('headquarters_id')->constrained()
+            $table->foreignId('headquarter_id')->constrained()
                 ->onUpdate('cascade')
                 ->onDelete('restrict');
-            $table->foreignId('administrative_units_id')->constrained()
+            $table->foreignId('administrative_unit_id')->constrained()
                 ->onUpdate('cascade')
                 ->onDelete('restrict');
             $table->smallInteger('code')->unique();

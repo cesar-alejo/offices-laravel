@@ -42,9 +42,9 @@ class OfficeController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'headquarters_id' => 'required',
-            'administrative_units_id' => 'required',
-            'code' => 'required|numeric|unique:administrative_units',
+            'headquarter_id' => 'required|numeric',
+            'administrative_unit_id' => 'required|numeric',
+            'code' => 'required|numeric|min:1000|max:9000|unique:offices',
             'name' => 'required|max:60',
             'details' => 'max:256',
         ]);
@@ -69,28 +69,33 @@ class OfficeController extends Controller
     public function edit($id)
     {
         $office = Office::findOrFail($id);
+        $headquarters = Headquarter::all();
+        $units = AdministrativeUnit::all();
 
-        return view('offices.edit', compact('office'));
+        return view('offices.edit', compact('office', 'headquarters', 'units'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Office $office)
+    public function update(Request $request, $id)
     {
-        //$unit = AdministrativeUnit::findOrFail($id);
+        $office = Office::findOrFail($id);
 
-        //$request->validate([
-        //    'code' => 'required|numeric|unique:administrative_units,' . $unit->id,
-        //    'name' => 'required|max:60',
-        //    'details' => 'max:256',
-        //]);
-  
-        
-        //$unit->code = $request->code;
-        //$unit->name = $request->name;
-        //$unit->details = $request->details;
-        //$unit->save();
+        $request->validate([
+            'headquarter_id' => 'required|numeric',
+            'administrative_unit_id' => 'required|numeric',
+            'code' => 'required|numeric|min:1000|max:9000|unique:offices,' . $office->id,
+            'name' => 'required|max:60',
+            'details' => 'max:256',
+        ]);
+
+        $office->headquarter_id = $request->headquarter_id;
+        $office->administrative_unit_id = $request->administrative_unit_id;
+        $office->code = $request->code;
+        $office->name = $request->name;
+        $office->details = $request->details;
+        $office->save();
   
         return to_route('office.index')
             ->with('success', 'Record update succesfull.');

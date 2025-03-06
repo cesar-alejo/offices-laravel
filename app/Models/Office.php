@@ -7,8 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class Office extends Model
 {
     protected $fillable = [
-        'headquarters_id',
-        'administrative_units_id',
+        'headquarter_id',
+        'administrative_unit_id',
         'code',
         'name',
         'floor',
@@ -16,14 +16,14 @@ class Office extends Model
         'details',
     ];
 
-    public function sede()
+    public function headquarter()
     {
-        return $this->belongsTo(Headquarter::class, 'headquarters_id', 'id');
+        return $this->belongsTo(Headquarter::class);
     }
 
-    public function unidad()
+    public function administrative_unit()
     {
-        return $this->belongsTo(AdministrativeUnit::class, 'administrative_units_id', 'id');
+        return $this->belongsTo(AdministrativeUnit::class);
     }
 
 }

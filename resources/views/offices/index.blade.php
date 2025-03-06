@@ -36,8 +36,8 @@
                                 <td>{{ $office->id }}</td>
                                 <td class="p-2">{{ $office->code }}</td>
                                 <td class="p-2">{{ $office->name }}</td>
-                                <td class="p-2">{{ $office->sede->name }}</td>
-                                <td class="p-2">{{ $office->unidad->name }}</td>
+                                <td class="p-2">{{ $office->headquarter->name }}</td>
+                                <td class="p-2">{{ $office->administrative_unit->name }}</td>
                             </tr>
                         @endforeach
                         <footer>

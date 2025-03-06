@@ -13,29 +13,32 @@
                         @csrf
 
                         <div>
-                            <x-input-label for="headquarters_id" :value="__('Sede')" />
-                            <select id="headquarters_id"
-                                class="border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm block mt-1 w-full"
-                                name="headquarters_id" required autofocus>
+                            <x-input-label for="headquarter_id" :value="__('Sede')" />
+                            <select class="border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm block mt-1 w-full"
+                                id="headquarter_id" name="headquarter_id" required autofocus>
                                 <option value="">Seleccione una sede</option>
                                 @foreach ($headquarters as $headquarter)
-                                    <option value="{{ $headquarter->id }}">{{ $headquarter->name }}</option>
+                                    <option value="{{ $headquarter->id }}" {{ old('headquarter_id') == $headquarter->id ? 'selected' : '' }}>
+                                        {{ $headquarter->name }}
+                                    </option>
                                 @endforeach                             
                             </select>
-                            <x-input-error :messages="$errors->get('headquarters_id')" class="mt-2" />
+                            <x-input-error :messages="$errors->get('headquarter_id')" class="mt-2" />
                         </div>
                         
                         <div class="mt-4">
-                            <x-input-label for="administrative_units_id" :value="__('Unidad Administrativa')" />
-                            <select id="administrative_units_id" 
+                            <x-input-label for="administrative_unit_id" :value="__('Unidad Administrativa')" />
+                            <select id="administrative_unit_id" 
                                 class="border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm block mt-1 w-full"
-                                name="administrative_units_id" required autofocus>
+                                name="administrative_unit_id" required autofocus>
                                 <option value="">Seleccione una unidad</option>
                                 @foreach ($units as $unit)
-                                    <option value="{{ $unit->id }}">{{ $unit->name }}</option>
+                                    <option value="{{ $unit->id }}" {{ old('administrative_unit_id') == $unit->id ? 'selected' : '' }}>
+                                        {{ $unit->name }}
+                                    </option>
                                 @endforeach                                
                             </select>
-                            <x-input-error :messages="$errors->get('administrative_units_id')" class="mt-2" />
+                            <x-input-error :messages="$errors->get('administrative_unit_id')" class="mt-2" />
                         </div>
 
                         <div class="mt-4">
